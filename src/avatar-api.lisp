@@ -20,9 +20,20 @@
 
 ;;; Gravatar
 
-(defun gravatar (email)
+(defun validate-gravatar-size (size)
+  (if (and (>= size 1) (<= size 2048))
+      t
+      (error 'wrong-size :size size :allowed-sizes "from 1 to 2048")))
+
+(defun gravatar (email &optional size)
   (let ((hash (crypto-shortcuts:md5 (string-downcase email))))
-    (format nil "http://www.gravatar.com/avatar/~A" hash)))
+    (format nil "http://www.gravatar.com/avatar/~A~A"
+            hash
+            (if size
+                (progn
+                  (validate-gravatar-size size)
+                  (format nil "?s=~A" size))
+                ""))))
 
 ;;; Tumblr
 
