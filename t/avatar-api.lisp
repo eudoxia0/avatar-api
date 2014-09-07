@@ -8,7 +8,9 @@
 
 (test gravatar
   (is (equal (avatar-api:gravatar "jdoe@initech.com")
-             "http://www.gravatar.com/avatar/6aef61d98ad63bd1aaa89345eb150df2")))
+             "http://www.gravatar.com/avatar/6aef61d98ad63bd1aaa89345eb150df2"))
+  (is (equal (avatar-api:gravatar "jdoe@initech.com" 25)
+             "http://www.gravatar.com/avatar/6aef61d98ad63bd1aaa89345eb150df2?s=25")))
 
 (test tumblr
   (is (equal (avatar-api:tumblr "my-blog.tumblr.com")
