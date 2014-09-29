@@ -3,7 +3,9 @@
   (:use :cl)
   (:export :wrong-size
            :gravatar
-           :tumblr))
+           :tumblr
+           :yahoo
+           :google))
 (in-package :avatar-api)
 
 ;;; Errors
@@ -52,3 +54,21 @@
                 (validate-tumblr-size size)
                 (format nil "/~A" size))
               "")))
+
+;;; Yahoo
+
+(defun yahoo (userid)
+  (format nil "http://img.msg.yahoo.com/v1/displayImage/yahoo/~A" userid))
+
+;;; Google (kind of a hack)
+
+(defun json-decode (stream)
+  (cl-json:decode-json-from-string
+   (flexi-streams:octets-to-string stream)))
+
+(defun google (userid)
+  (let ((json (json-decode
+               (drakma:http-request
+                (format nil "http://picasaweb.google.com/data/entry/api/user/~A?alt=json"
+                        userid)))))
+    (rest (assoc :$t (rest (assoc :gphoto$thumbnail (rest (assoc :entry json))))))))

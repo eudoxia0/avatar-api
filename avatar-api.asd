@@ -7,7 +7,9 @@
   :version "0.1"
   :author "Fernando Borretti"
   :license "MIT"
-  :depends-on (:crypto-shortcuts)
+  :depends-on (:crypto-shortcuts
+               :drakma
+               :cl-json)
   :components ((:module "src"
                 :components
                 ((:file "avatar-api"))))
