@@ -1,4 +1,8 @@
-# Avatar-Api - Get avatars from Gravatar, Google+ and others.
+# avatar-api
+
+[![Build Status](https://travis-ci.org/eudoxia0/avatar-api.svg?branch=master)](https://travis-ci.org/eudoxia0/avatar-api)
+
+avatar-api is a library for getting avatars from Gravatar, Google+ and others.
 
 # Usage
 
